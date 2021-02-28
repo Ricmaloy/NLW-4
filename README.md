@@ -25,9 +25,11 @@ O usuário é notificado quando um novo desafio está disponível através de um
  
  ### O que vem por aí ⚠️⚠️⚠️
  ##### Aprimoramentos que levarão a aplicação para o próximo nível 🚧🚧🚧
-  🔲 - Dark Theme UI com switch 
+  ✅ - Dark Theme UI com switch 
 
-  🔲 - Upgrade UI level up and Time-Running animations 
+  ✅ - Upgrade UI level up and
+  
+  ✅ - Time-Running button animation
 
   🔲 - Aprimorar a responsividade da aplicação para todos tipos de tela
  

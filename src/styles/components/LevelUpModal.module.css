@@ -46,3 +46,7 @@
   border: 0;
   font-size: 0;
 }
+
+.confettiContainer {
+  transform: translateX(200px);
+}

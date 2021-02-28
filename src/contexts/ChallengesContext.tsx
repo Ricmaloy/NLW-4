@@ -8,7 +8,8 @@ interface ChallengeProviderProps {
     children: ReactNode,
     level: number,
     currentXP: number,
-    challengesCompleted: number
+    challengesCompleted: number,
+    theme: string
 }
 
 interface challenge {
@@ -23,6 +24,8 @@ interface ChallengesContextData {
     challengesCompleted: number, 
     activeChallenge: challenge,
     experienceToNextLevel: number,
+    isLevelUpModalOpen: boolean,
+    theme: string,
     levelUp: () => void, 
     startNewChallenge: () => void,
     resetChallenge: () => void,
@@ -36,6 +39,8 @@ export function ChallengesProvider({
         children,
         ...rest
     }:ChallengeProviderProps){
+
+    const theme = rest.theme ?? 'dark';
 
     const [level, setLevel] = useState(rest.level ?? 1);
     const [currentXP, setCurrentXP] = useState(rest.currentXP ?? 0);
@@ -60,6 +65,8 @@ export function ChallengesProvider({
     function levelUp() {
         setLevel(level + 1);
         setIsLevelUpModalOpen(true);
+
+        new Audio('/level_up.mp3').play();
     }
 
     function closeLevelUpModal () {
@@ -104,11 +111,13 @@ export function ChallengesProvider({
 
     return (
         <ChallengesContext.Provider value={{
+            theme,
             level, 
             currentXP, 
             challengesCompleted, 
             activeChallenge,
             experienceToNextLevel,
+            isLevelUpModalOpen,
             levelUp, 
             startNewChallenge,
             resetChallenge,

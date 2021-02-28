@@ -1,14 +1,24 @@
 .container {
     height: 100vh;
+    display: grid;
+
+    grid-template-columns: 110px 1fr;
+
+    grid-template-areas: 'AS CT';
+}
+
+.content {
+    height: 100vh;
     max-width: 992px;
     margin: 0 auto;
     padding: 2.5rem 2rem;
 
     display: flex;
     flex-direction: column;
+    grid-area: CT;
 }
 
-.container section {
+.content section {
     flex: 1;
 
     display: grid;

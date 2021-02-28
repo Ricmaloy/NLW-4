@@ -1,0 +1,51 @@
+.switchContainer {
+    margin-bottom: 20px;
+    transform: rotate(90deg) translateY(-30%);
+    transform-origin: center;
+}
+
+.switchContainer input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.switchContainer label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 60px;
+    height: 25px;
+    background: var(--blue);
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+.switchContainer label::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+.switchContainer input:checked + label::before {
+    left: calc(100%);
+    transform: translateX(-100%);
+}
+
+.switchContainer label:active:after {
+    width: 45px;
+  }
+
+.switchContainer input {
+    visibility: hidden;
+}
+
+.switchSpan {
+    display: none;
+}

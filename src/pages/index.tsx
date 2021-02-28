@@ -11,11 +11,13 @@ import { ChallengeBox } from "../components/ChallengeBox";
 import styles from '../styles/pages/Home.module.css';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 import { CountdownProvider } from '../contexts/CountdownContext';
+import { AsideBar } from '../components/AsideBar';
 
 interface HomeProps {
   level: number,
   currentXP: number,
-  challengesCompleted: number
+  challengesCompleted: number,
+  theme: string
 }
 
 export default function Home(props:HomeProps) {
@@ -24,39 +26,46 @@ export default function Home(props:HomeProps) {
       level={props.level}
       currentXP={props.currentXP}
       challengesCompleted={props.challengesCompleted}
+      theme={props.theme}
     >
       <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
 
-        <ExperienceBar />
+        <AsideBar />
         
-        <CountdownProvider >
-          <section>
-            <div >
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox/>
-            </div>
-          </section>
-        </CountdownProvider>
+        <div className={styles.content}>
+          <Head>
+            <title>Início | move.it</title>
+          </Head>
+
+          <ExperienceBar />
+          
+          <CountdownProvider >
+            <section>
+              <div >
+                <Profile />
+                <CompletedChallenges />
+                <Countdown />
+              </div>
+              <div>
+                <ChallengeBox/>
+              </div>
+            </section>
+          </CountdownProvider>
+        </div>
       </div>
     </ChallengesProvider>  
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const {level, currentXP, challengesCompleted} = ctx.req.cookies;
+  const {level, currentXP, challengesCompleted, theme} = ctx.req.cookies;
 
   return {
     props: {
       level: Number(level),
       currentXP: Number(currentXP),
       challengesCompleted: Number(challengesCompleted),
+      theme: String(theme)
     }
   }
 }

@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
-import { ChallengesContext } from '../contexts/ChallengesContext';
+import { useContext, useEffect, useState } from 'react';
 import { CountdownContext } from '../contexts/CountdownContext';
 import styles from '../styles/components/Countdown.module.css';
 
@@ -17,7 +16,13 @@ export function Countdown() {
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
     const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
-    
+    const [perc, setPerc] = useState(100);
+
+    useEffect(()=>{
+        const percentage =  Math.round(((minutes*60 + seconds)*100)/ (25*60));
+        setPerc(percentage);
+
+    },[seconds, minutes]);
 
     return (
         <div>
@@ -50,7 +55,8 @@ export function Countdown() {
                             className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
                             onClick={resetCountdown}
                         >
-                            Abandonar ciclo
+                            <p>Abandonar ciclo</p>
+                            <div className={styles.timeout} style={{width: `${perc}%`}} ></div>
                         </button>
                         ) : (
                         <button 
@@ -58,7 +64,7 @@ export function Countdown() {
                             className={styles.countdownButton}
                             onClick={startCountdown}
                         >
-                            Iniciar um ciclo
+                            <p>Iniciar um ciclo</p>
                         </button>
                         )
                     }
